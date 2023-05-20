@@ -1,0 +1,83 @@
+---
+title: "Stock Price Forecasting Application"
+output:
+  html_document:
+    theme: cerulean
+    highlight: tango
+---
+
+<style>
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #333333;
+}
+p {
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+</style>
+
+# Introduction
+
+This project is a Stock Price Forecasting application implemented in R using the Shiny and Keras framework. The application predicts future stock prices based on historical data and provides visualizations of these predictions for a better understanding.
+
+## Methodology
+
+The Stock Price Forecasting Application is based on the following methodology:
+
+1. **Data Loading**: Historical stock price data is loaded into the application.
+
+2. **Data Scaling**: The data is scaled to improve the efficiency of the neural network.
+
+3. **Neural Network Model Training**: The application uses a Long Short Term Memory (LSTM) model, a type of recurrent neural network, to predict future prices based on historical data. This model is particularly effective for time series data, like stock prices, where past trends often influence future results. The LSTM model is trained using the following default parameter settings:
+    - Units in first LSTM layer: 256
+    - Units in second LSTM layer: 128
+    - Dropout rate in both LSTM layers: 0.2
+    - Regularization parameter (lambda): 0.01
+    - Learning rate: 0.01
+    - Loss function: Mean Squared Error
+    - Metric: Mean Absolute Error
+    - Batch size: 64
+    - Validation split: 0.2
+    - Forecast Days: 30
+    - Number of Stocks: 10
+
+   The model is initially trained for a total of 5 epochs. For the rolling forecast, the model is retrained with each new data point for an additional epoch. The total epoch is calculated by taking the number of columns within the dataset and multiplying by the sum of epochs to train the initial model and number of forecast days. The total epochs would be 10 x (10 + 30) = 400. 
+   
+   **IMPORTANT**
+   The provided configurations took approximately 45 minutes to execute on a Mac M1 2021. It's important to note that the configurations were adjusted due to incorrect dependencies and incompatibility with Apple Silicon, requiring downgraded versions of TensorFlow and Keras. Adjusting the configurations may impact the model's performance, potentially leading to underfitting or overfitting, which can result in inaccurate predictions.
+
+4. **Prediction Generation**: The trained model is used to predict future stock prices.
+
+5. **Visualizing the Forecasts**: The application generates plot visualizations of the predicted stock prices to assist in understanding the forecasts.
+
+# Features
+
+The Stock Price Forecasting Application offers the following features:
+
+- **Predicted Prices Table**: A table showing the predicted future prices of the stocks.
+
+- **Prediction Plots**: Plots showing the predicted future stock prices over time.
+
+- **Loss Plots**: Plots showing the loss and mean absolute error during the training of the LSTM model. These plots help in understanding the performance and reliability of the model. Note, that the epochs in the history fit model to show relevant loss plots. For ease of use, this was set to 1.
+
+# Future Work
+
+The Stock Price Forecasting Application can be further improved with additional features, such as:
+
+- **Additional Predictive Models**: Including more types of predictive models to compare the accuracy of different approaches.
+
+- **Parameter Tuning Interface**: Allowing users to adjust the parameters of the predictive model to optimize its performance.
+
+- **Additional Visualizations**: Providing more types of visualizations to facilitate understanding of the predictions.
+
+# Disclaimer
+
+This application is for informational purposes only and does not guarantee any specific outcomes or profits. The predicted stock prices are based on historical data and do not guarantee future results. Users are advised to make responsible decisions and not rely solely on the information provided by this application.
+
+# Contact Information
+
+For any questions or feedback, please contact:
+- Name: Joseph Chae
+- Email: jssc1025@gmail.com
+- GitHub: https://github.com/jssc1025
